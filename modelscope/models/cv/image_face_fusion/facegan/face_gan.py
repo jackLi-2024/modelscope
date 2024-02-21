@@ -24,7 +24,7 @@ class GPEN(object):
     def load_model(self, channel_multiplier=2):
         self.model = FullGenerator(self.resolution, 512, self.n_mlp,
                                    channel_multiplier).to(self.device)
-        pretrained_dict = torch.load(self.mfile)
+        pretrained_dict = torch.load(self.mfile, map_location=self.device)
         self.model.load_state_dict(pretrained_dict)
         self.model.eval()
 
